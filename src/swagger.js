@@ -59,6 +59,25 @@
  *         description: Link not found
  */
 
+
+/**
+ * @swagger
+ * /{alias}:
+ *   delete:
+ *     summary: Delete a shortened URL
+ *     parameters:
+ *       - in: path
+ *         name: alias
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Link deleted
+ *       404:
+ *         description: Link not found
+ */
+
 /**
  * @swagger
  * /{alias}/restore:
