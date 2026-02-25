@@ -62,7 +62,7 @@ app.get("/:alias", (req, res) => {
   link.updatedAt = new Date().toISOString();
 
   let milestone = null;
-  if ([2,10,20,50,100].includes(link.clicks)) {
+  if (link.clicks % 10 === 0) {
     milestone = (`🔥 ${alias} hit ${link.clicks} clicks!`);
     console.log(milestone);
   }
