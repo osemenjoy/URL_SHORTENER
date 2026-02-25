@@ -87,10 +87,10 @@ export default {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
-        description: 'Local development server',
+        url: process.env.API_URL || 'http://localhost:3000',
+        description: process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server',
       },
     ],
   },
-  apis: ['./src/swagger.js'],
+  apis: ['./src/server.js'],
 };

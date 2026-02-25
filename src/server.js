@@ -1,11 +1,14 @@
 import express from 'express';
 import fs from 'fs';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import urlStore from './store.js';
 import bufferedSave from './persistence.js';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOptions from './swagger.js'
+
+dotenv.config();
 
 const app = express();
 
@@ -16,12 +19,17 @@ if (fs.existsSync("./storage.json")) {
   }
 }
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: false
+}));
 app.use(express.json());
 app.use(express.static("public"));
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 app.get("/health", (req, res) => {
     res.status(200).json({ status: "ok" });
