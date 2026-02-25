@@ -1,7 +1,11 @@
 import express from 'express';
 import fs from 'fs';
+import cors from 'cors';
 import urlStore from './store.js';
 import bufferedSave from './persistence.js';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOptions from './swagger.js'
 
 const app = express();
 
@@ -12,8 +16,12 @@ if (fs.existsSync("./storage.json")) {
   }
 }
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 app.get("/health", (req, res) => {
     res.status(200).json({ status: "ok" });
@@ -44,10 +52,10 @@ app.post("/shorten", (req, res) => {
 
   return res.status(201).json({
     message: "Short link created",
-    shortUrl: `${req.protocol}://${req.get("host")}/${alias}`
+    shortUrl: `${req.protocol}://${req.get("host")}/${alias}`,
+    data: urlStore[alias]
   });
 });
-
 
 app.get("/:alias", (req, res) => {
   const { alias } = req.params;
@@ -69,9 +77,9 @@ app.get("/:alias", (req, res) => {
 
   bufferedSave(urlStore);
 
-  // If request expects JSON (UI fetch call)
-  if (req.headers.accept && req.headers.accept.includes("application/json")) {
-    return res.status(200).json({
+  // Return JSON if Accept header requests it or preview=true query param is set
+  if ((req.headers.accept && req.headers.accept.includes("application/json")) ||    req.query.preview === "true") {
+    return res.json({
       originalUrl: link.originalUrl,
       clicks: link.clicks,
       milestone
@@ -98,7 +106,6 @@ app.delete("/:alias", (req, res) => {
 
   return res.status(200).json({ message: "Link soft deleted" });
 });
-
 
 app.patch("/:alias/restore", (req, res) => {
   const { alias } = req.params;
