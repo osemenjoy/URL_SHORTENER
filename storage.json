@@ -1,0 +1,44 @@
+{
+  "hell": {
+    "originalUrl": "http://localhost:3000/health",
+    "clicks": 23,
+    "isDeleted": false,
+    "createdAt": "2026-02-25T01:00:41.959Z",
+    "updatedAt": "2026-02-25T01:12:12.149Z"
+  },
+  "g": {
+    "originalUrl": "http://google.com/",
+    "clicks": 1,
+    "isDeleted": false,
+    "createdAt": "2026-02-25T01:06:55.103Z",
+    "updatedAt": "2026-02-25T01:07:04.105Z"
+  },
+  "mygee": {
+    "originalUrl": "http://google.com/",
+    "clicks": 9,
+    "isDeleted": false,
+    "createdAt": "2026-02-25T01:16:18.592Z",
+    "updatedAt": "2026-02-25T01:26:41.194Z"
+  },
+  "tess": {
+    "originalUrl": "http://google.com/",
+    "clicks": 0,
+    "isDeleted": false,
+    "createdAt": "2026-02-25T01:27:32.210Z",
+    "updatedAt": "2026-02-25T01:27:32.210Z"
+  },
+  "jj": {
+    "originalUrl": "http://google.com/",
+    "clicks": 0,
+    "isDeleted": false,
+    "createdAt": "2026-02-25T01:28:19.075Z",
+    "updatedAt": "2026-02-25T01:28:19.075Z"
+  },
+  "gee": {
+    "originalUrl": "http://google.com/",
+    "clicks": 3,
+    "isDeleted": false,
+    "createdAt": "2026-02-25T01:30:26.408Z",
+    "updatedAt": "2026-02-25T01:30:40.682Z"
+  }
+}
