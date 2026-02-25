@@ -92,5 +92,5 @@ export default {
       },
     ],
   },
-  apis: ['./src/server.js'],
+  apis: ['./src/swagger.js'],
 };
